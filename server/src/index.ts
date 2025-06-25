@@ -1,42 +1,47 @@
 import express from 'express';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@as-integrations/express5';
 import cors from 'cors';
+import { expressMiddleware } from '@as-integrations/express5';
+import http from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+import CreateGraphqlServer from './graphql';
 
-async function init(){
-    
-const app = express();
-const PORT = Number(process.env.PORT) || 8000;
+async function init() {
+  const app = express();
+  const PORT = Number(process.env.PORT) || 8000;
 
-const gqlServer = new ApolloServer({
-    typeDefs:`
-        type Query{
-            hello : String
-        }
-    `,
-    resolvers:{
-        Query:{
-            hello: ()=>`hey there I am graphQL server`
-        }
-    }
-});
+  const httpServer = http.createServer(app); 
+  const io = new SocketIOServer(httpServer, {
+    cors: {
+      origin: '*',
+      methods: ['GET', 'POST'],
+    },
+  });
 
-await gqlServer.start();
+  
+  app.get('/', (req, res) => {
+    res.json({ msg: 'server has started' });
+  });
 
-app.get("/",(req,res)=>{
-    res.json({
-        msg:"server has started"
+  const gqlServer = await CreateGraphqlServer();
+
+  app.use(
+    '/graphql',
+    cors<cors.CorsRequest>(),
+    express.json(),
+    expressMiddleware(gqlServer, {
+      context: async ({ req }) => {
+        const token = req.headers.authorization || '';
+        return {
+          userId: token,
+          io, 
+        };
+      },
     })
-});
+  );
 
-app.use(
-  '/graphql',
-  cors<cors.CorsRequest>(),
-  express.json(),
-  expressMiddleware(gqlServer),
-);
-
-app.listen(PORT,()=>console.log(`Server is running on Port : ${PORT}`));
+  httpServer.listen(PORT, () =>
+    console.log(`Server is running on port ${PORT}`)
+  );
 }
 
 init();
