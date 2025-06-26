@@ -100,7 +100,6 @@ export default function EventDetail() {
     try {
       const client = getClient();
       if (isAttending) {
-        // Leave event
         const res = await client.request<{
           leaveEvent: {
             id: string;
@@ -111,7 +110,6 @@ export default function EventDetail() {
         }>(LEAVE_EVENT, { eventId });
         setAttendees(res.leaveEvent.attendees);
       } else {
-        // Join event
         const res = await client.request<{
           joinEvent: {
             id: string;

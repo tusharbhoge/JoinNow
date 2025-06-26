@@ -76,7 +76,7 @@ export default function EventList() {
                   <Text style={styles.title}>{item.name}</Text>
                   <Text style={styles.location}>{item.location}</Text>
                 </View>
-                <Text style={styles.count}>{item.attendees.length} 😊</Text>
+                <Text style={styles.count}>{item.attendees.length} Joined</Text>
               </View>
             </View>
           </TouchableOpacity>
