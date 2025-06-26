@@ -6,7 +6,6 @@ async function CreateGraphqlServer() {
     typeDefs, 
     resolvers 
   });
-
   await gqlServer.start();
   console.log("gqlserver started")
   

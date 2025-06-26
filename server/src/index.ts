@@ -8,18 +8,13 @@ import CreateGraphqlServer from './graphql';
 async function init() {
   const app = express();
   const PORT = Number(process.env.PORT) || 8000;
-
   const httpServer = http.createServer(app); 
+
   const io = new SocketIOServer(httpServer, {
     cors: {
       origin: '*',
       methods: ['GET', 'POST'],
     },
-  });
-
-  
-  app.get('/', (req, res) => {
-    res.json({ msg: 'server has started' });
   });
 
   const gqlServer = await CreateGraphqlServer();

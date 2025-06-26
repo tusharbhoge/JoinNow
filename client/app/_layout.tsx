@@ -13,7 +13,6 @@ function AuthGate({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const isInAuthGroup = segments[0] === 'login';
 
-  // Delay navigation until layout is mounted
   useEffect(() => {
     setReady(true);
   }, []);

@@ -1,5 +1,5 @@
 export const typeDefs = `#graphql
-    scalar DateTime
+  scalar DateTime
 
   type User {
     id: String!
@@ -16,11 +16,13 @@ export const typeDefs = `#graphql
   }
 
   type Query {
+    event(id: ID!): Event
     events: [Event!]!
     me: User
   }
 
   type Mutation {
     joinEvent(eventId: String!): Event
+    leaveEvent(eventId: String!): Event
   }
 `
