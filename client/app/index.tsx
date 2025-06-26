@@ -12,10 +12,13 @@ const EVENTS_QUERY = `query {
 }`;
 
 export default function EventList() {
-  const { data, isLoading } = useQuery(['events'], async () => {
-    const client = getClient();
-    const res = await client.request(EVENTS_QUERY);
-    return res.events;
+  const { data, isLoading } = useQuery({
+    queryKey: ['events'],
+    queryFn: async () => {
+      const client = getClient();
+      const res = await client.request<{ events: { id: string; name: string; location: string }[] }>(EVENTS_QUERY);
+      return res.events;
+    },
   });
 
   const router = useRouter();

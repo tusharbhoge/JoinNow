@@ -5,7 +5,7 @@ import { View, Text, Button, FlatList } from 'react-native';
 import { useAuth } from '../../src/state/authStore';
 import { io } from 'socket.io-client';
 
-const JOIN_EVENT = `mutation JoinEvent($eventId: ID!) {
+const JOIN_EVENT = `mutation JoinEvent($eventId: String!) {
   joinEvent(eventId: $eventId) {
     id
     attendees {
@@ -34,7 +34,7 @@ export default function EventDetail() {
 
   const joinEvent = async () => {
     const client = getClient();
-    const res = await client.request(JOIN_EVENT, { eventId });
+    const res = await client.request<{ joinEvent: { attendees: { name: string; email: string }[] } }>(JOIN_EVENT, { eventId });
     setAttendees(res.joinEvent.attendees);
   };
 
