@@ -4,6 +4,7 @@ import { getClient } from '../../src/lib/graphqlClient';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useAuth } from '../../src/state/authStore';
 import { io } from 'socket.io-client';
+import Constants from 'expo-constants';
 
 const GET_EVENT = `query GetEvent($eventId: ID!) {
   event(id: $eventId) {
@@ -44,7 +45,9 @@ const LEAVE_EVENT = `mutation LeaveEvent($eventId: String!) {
   }
 }`;
 
-const socket = io('http://localhost:8000');
+
+const baseUrl = Constants.expoConfig?.extra?.API_BASE_URL ;
+const socket = io(`${baseUrl}`);
 
 export default function EventDetail() {
   const { id: eventId } = useLocalSearchParams();

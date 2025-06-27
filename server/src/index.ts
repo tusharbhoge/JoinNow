@@ -26,7 +26,6 @@ async function init() {
     expressMiddleware(gqlServer, {
       context: async ({ req }) => {
         const token = req.headers.authorization || '';
-        console.log(token)
         return {
           userId: token,
           io, 

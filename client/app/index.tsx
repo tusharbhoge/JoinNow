@@ -4,6 +4,7 @@ import { FlatList, Text, TouchableOpacity, View, StyleSheet, ActivityIndicator }
 import { useRouter } from 'expo-router';
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
+import Constants from 'expo-constants';
 
 const EVENTS_QUERY = `query {
   events {
@@ -16,7 +17,8 @@ const EVENTS_QUERY = `query {
   }
 }`;
 
-const socket = io('http://localhost:8000'); 
+const baseUrl = Constants.expoConfig?.extra?.API_BASE_URL ;
+const socket = io(`${baseUrl}`); 
 
 export default function EventList() {
   const queryClient = useQueryClient();
