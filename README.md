@@ -10,10 +10,9 @@ The app allows users to:
 
 ---
 
-## 📹 Demo Video
+## 🎥 Demo Video
 
-[Click here to view the demo video](./demo_video/demovideo.mov)
-
+[![Watch the video](https://youtu.be/DSv47p0-1T4)](https://youtu.be/DSv47p0-1T4)
 
 ---
 
