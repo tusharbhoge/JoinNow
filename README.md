@@ -10,9 +10,10 @@ The app allows users to:
 
 ---
 
-## 📹 Demo
+## 📹 Demo Video
 
-_A demo video showcasing the complete flow will be added here soon._
+[Click here to view the demo video](./demo_video/demovideo.mov)
+
 
 ---
 
