@@ -10,7 +10,7 @@ The app allows users to:
 
 ---
 
-![Snapshot of live demo](./snapshots/realtime.png)
+![Snapshot of live demo](./snapshot/realtime.png)
 Also added demo video below 👇
 
 ---
