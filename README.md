@@ -10,6 +10,10 @@ The app allows users to:
 
 ---
 
+![Snapshot of live demo](./snapshots/realtime.png)
+Also added demo video below 👇
+
+---
 ## 🎥 Demo Video
 
 [![Watch the video](https://youtu.be/DSv47p0-1T4)](https://youtu.be/DSv47p0-1T4)
